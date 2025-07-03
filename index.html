@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulação de Frutas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+        input, button {
+            margin: 5px;
+        }
+        ul {
+            padding: 0;
+        }
+        li {
+            list-style: none;
+            padding: 5px;
+            background-color: #f0f0f0;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Lista de Frutas</h1>
+
+    <input type="text" id="frutaInput" placeholder="Digite uma fruta">
+    <button onclick="adicionarFruta()">Adicionar</button>
+    <button onclick="ordenarFrutas()">Ordenar A-Z</button>
+
+    <ul id="listaFrutas"></ul>
+
+    <script>
+        // Array de frutas
+        let frutas = ["Maçã", "Banana", "Laranja", "Abacaxi"];
+
+        function exibirFrutas() {
+            const lista = document.getElementById("listaFrutas");
+            lista.innerHTML = "";
+            frutas.forEach((fruta, index) => {
+                const item = document.createElement("li");
+                item.textContent = fruta + " ";
+                
+                const botaoRemover = document.createElement("button");
+                botaoRemover.textContent = "Remover";
+                botaoRemover.onclick = () => removerFruta(index);
+
+                item.appendChild(botaoRemover);
+                lista.appendChild(item);
+            });
+        }
+
+    
+        function adicionarFruta() {
+            const input = document.getElementById("frutaInput");
+            const novaFruta = input.value.trim();
+            if (novaFruta) {
+                frutas.push(novaFruta);
+                input.value = "";
+                exibirFrutas();
+            } else {
+                alert("Digite uma fruta válida.");
+            }
+        }
+
+        function removerFruta(index) {
+            frutas.splice(index, 1);
+            exibirFrutas();
+        }
+
+        function ordenarFrutas() {
+            frutas.sort();
+            exibirFrutas();
+        }
+
+        exibirFrutas();
+    </script>
+
+</body>
+</html>
